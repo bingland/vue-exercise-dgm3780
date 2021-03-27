@@ -1,28 +1,103 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Exercise App"/>
+  <div class="App">
+    <div class="workoutGrid">
+      <workout-card v-for="(workout, index) in workouts" :key="index" :workout="workout" />
+    </div>
+    <div class="addWorkoutArea">
+
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// menu that lets you choose between workouts / exercises
+// filters for most distance / weight?
+// list of workouts that is displayed in a card grid (1)
+// click on card to display details
+// list of exercises regardless of workouts
+// add area. can add multiple exercises to a workout. once submitted, if the user wants to add more, they go to the workout. (2)
+// auto set name of workout to date. if there are multiple in a day, then auto add 2 or time or something. (3)
+// give users to change workout title? (4)
+
+// reset css
+import '@/reset.css'
+
+import WorkoutCard from './components/WorkoutCard.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    WorkoutCard
+  },
+  data() {
+    return {
+      workouts: [
+        {
+          name: 'Workout 1',
+          date: new Date(),
+          exercises: [
+            {
+              type: 'benchpress', // types: running, bench press, custom?
+              // note: 'Bench Press ',
+              sets: 5,
+              reps: 20,
+              weight: 100
+            },
+            {
+              type: 'running', // types: running, bench press, custom?
+              // note: 'Running session ',
+              time: 60, // in minutes?
+              distance: 2.5 // in miles
+            }
+          ]
+        },
+        {
+          name: 'Workout 2',
+          date: new Date(),
+          exercises: [
+            {
+              type: 'benchpress', // types: running, bench press, custom?
+              // note: 'Bench Press ',
+              sets: 5,
+              reps: 20,
+              weight: 100
+            },
+            {
+              type: 'running', // types: running, bench press, custom?
+              // note: 'Running session ',
+              time: 60, // in minutes?
+              distance: 2.5 // in miles
+            }
+          ]
+        }
+      ]
+    }
+  },
+  methods: {
+    
   }
 }
 </script>
 
 <style>
-#app {
+.App {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.workoutGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+@media only screen and (max-width: 900px) {
+  .workoutGrid { grid-template-columns: repeat(3, 1fr); }
+}
+@media only screen and (max-width: 700px) {
+  .workoutGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media only screen and (max-width: 550px) {
+  .workoutGrid { grid-template-columns: repeat(1, 1fr); }
 }
 </style>
