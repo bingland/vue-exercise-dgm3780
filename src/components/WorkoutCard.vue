@@ -1,6 +1,5 @@
 <template>
   <div class="WorkoutCard">
-    <h1 class="workoutCardTitle">{{workout.name}}</h1>
     <p>{{workout.date}}</p>
     <div class="workoutInfo">
       <div class="workoutExercise" v-for="(exercise, index) in workout.exercises" :key="index">

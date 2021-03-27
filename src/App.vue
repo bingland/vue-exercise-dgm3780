@@ -3,9 +3,7 @@
     <div class="workoutGrid">
       <workout-card v-for="(workout, index) in workouts" :key="index" :workout="workout" />
     </div>
-    <div class="addWorkoutArea">
-
-    </div>
+    <add-workout-area @add:workout="addWorkout" />
   </div>
 </template>
 
@@ -23,18 +21,19 @@
 import '@/reset.css'
 
 import WorkoutCard from './components/WorkoutCard.vue'
+import AddWorkoutArea from './components/AddWorkoutArea.vue'
 
 export default {
   name: 'App',
   components: {
-    WorkoutCard
+    WorkoutCard,
+    AddWorkoutArea
   },
   data() {
     return {
       workouts: [
         {
-          name: 'Workout 1',
-          date: new Date(),
+          date: '2021-03-15',
           exercises: [
             {
               type: 'benchpress', // types: running, bench press, custom?
@@ -52,8 +51,7 @@ export default {
           ]
         },
         {
-          name: 'Workout 2',
-          date: new Date(),
+          date: '2021-03-16',
           exercises: [
             {
               type: 'benchpress', // types: running, bench press, custom?
@@ -74,7 +72,11 @@ export default {
     }
   },
   methods: {
-    
+    addWorkout (newWorkout) {
+      console.log('Adding workout...')
+      console.log(newWorkout)
+      this.workouts.push(newWorkout)
+    }
   }
 }
 </script>
@@ -85,19 +87,19 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  display: grid;
+  grid-template-columns: auto 350px;
+  grid-gap: 10px;
 }
 .workoutGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
-@media only screen and (max-width: 900px) {
-  .workoutGrid { grid-template-columns: repeat(3, 1fr); }
-}
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1200px) {
   .workoutGrid { grid-template-columns: repeat(2, 1fr); }
 }
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 950px) {
   .workoutGrid { grid-template-columns: repeat(1, 1fr); }
 }
 </style>
