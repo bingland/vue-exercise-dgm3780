@@ -58,15 +58,7 @@ export default {
       date: this.currentDate(),
       exercises: [
         {
-          type: 'benchpress',
-          sets: 20,
-          reps: 20,
-          weight: 180
-        },
-        {
-          type: 'running',
-          distance: 2,
-          time: 60
+          type: 'benchpress'
         }
       ]
     }
@@ -179,7 +171,7 @@ select[name="exerciseSelect"] {
   padding: 5px 0;
 }
 .exerciseItemParams .paramInput input[type="text"] {
-  width: 50px;
+  width: 60px;
   font-size: 16px;
 }
 
@@ -200,5 +192,6 @@ select[name="exerciseSelect"] {
   border-radius: 5px;
   background-color: rgb(75, 75, 75);
   color: white;
+  cursor: pointer;
 }
 </style>

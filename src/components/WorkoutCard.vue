@@ -7,12 +7,12 @@
           <h1>Benchpress Exercise</h1>
           <p>Sets: {{exercise.sets}}</p>
           <p>Reps: {{exercise.reps}}</p>
-          <p>Weight: {{exercise.weight}}</p>
+          <p>Weight: {{exercise.weight}} lbs</p>
         </div>
         <div v-if="exercise.type === 'running'" class="exercise running">
           <h1>Running Exercise</h1>
-          <p>Distance: {{exercise.distance}}</p>
-          <p>Time: {{exercise.time}}</p>
+          <p>Distance: {{exercise.distance}} miles</p>
+          <p>Time: {{exercise.time}} minutes</p>
         </div>
       </div>
       <div class="deleteWorkoutCard" @click="$emit('delete:workout', myIndex)">Delete</div>
@@ -37,9 +37,6 @@ export default {
       let time = `${month} ${date}, ${year}`
       return time
     }
-  },
-  computed: {
-    
   }
 }
 </script>
