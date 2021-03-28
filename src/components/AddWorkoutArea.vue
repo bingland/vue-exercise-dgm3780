@@ -3,8 +3,11 @@
     <h1>Add workout</h1>
     
     <form @submit.prevent="formSubmit">
-      <label for="workoutDate">Date: </label>
-      <input v-model="date" type="date" name="workoutDate">
+      <div class="dateInfo">
+        <label for="workoutDate">Date: </label>
+        <input v-model="date" type="date" name="workoutDate" required>
+      </div>
+      
       <div class="exerciseList">
         <div class="exerciseItem" v-for="(exercise, index) in exercises" :key="index" >
           <label for="exerciseSelect">Excercise type: </label>
@@ -13,21 +16,36 @@
             <option value="running">Running</option>
           </select>
           <div v-if="exercise.type === 'benchpress'" class="benchpressAdd exerciseItemParams">
-            <input v-model="exercise.sets" placeholder="Sets" type="text" required>
-            <input v-model="exercise.reps" placeholder="Reps" type="text" required>
-            <input v-model="exercise.weight" placeholder="Weight" type="text" required>
+            <div class="paramInput">
+              <label for="sets">Sets: </label>
+              <input v-model="exercise.sets" placeholder="Sets" name="sets" type="text" required>
+            </div>
+            <div class="paramInput">
+              <label for="reps">Reps: </label>
+              <input v-model="exercise.reps" placeholder="Reps" name="reps" type="text" required>
+            </div>
+            <div class="paramInput">
+              <label for="text">Weight: </label>
+              <input v-model="exercise.weight" placeholder="Weight" name="weight" type="text" required>
+            </div>
           </div>
           <div v-if="exercise.type === 'running'" class="runningAdd exerciseItemParams">
-            <input v-model="exercise.distance" placeholder="Distance" type="text" required>
-            <input v-model="exercise.time" placeholder="Time" type="text" required>
+            <div class="paramInput">
+              <label for="distance">Distance: </label>
+              <input v-model="exercise.distance" placeholder="Distance" name="distance" type="text" required>
+            </div>
+            <div class="paramInput">
+              <label for="time">Time: </label>
+              <input v-model="exercise.time" placeholder="Time" name="time" type="text" required>
+            </div>
           </div>
-          <button type="button" @click="deleteWorkout(index)">Delete</button>
+          <div class="deleteButton" type="button" @click="deleteWorkout(index)">Delete</div>
         </div>
-        <button type="button" @click="addWorkout">Add Exercise in Workout</button>
+        <div class="addExerciseButton" type="button" @click="addWorkout">+ Add Exercise</div>
         
       </div>
       
-      <button type="submit">Add Workout</button>
+      <button class="addWorkoutButton" type="submit">Submit Workout</button>
     </form>
   </div>
 </template>
@@ -91,6 +109,16 @@ export default {
           return false
         })
       }
+    },
+    currentDate: function () {
+      let curDate = new Date()
+      console.log(curDate)
+      let month = curDate.getMonth()
+      console.log(month)
+      let date = curDate.getDate()
+      let year = curDate.getFullYear()
+      let time = `${year}-${month}-${date}`
+      return time
     }
   }
 }
@@ -99,5 +127,70 @@ export default {
 <style scoped>
 .AddWorkoutArea {
   border: 1px solid black;
+  padding: 10px;
+}
+.AddWorkoutArea h1 {
+  font-size: 22px;
+  font-weight: bold;
+}
+.AddWorkoutArea form {
+
+}
+
+
+.dateInfo {
+  padding-top: 10px;
+}
+.dateInfo label[for="workoutDate"] {
+  
+}
+.dateInfo input[name="workoutDate"] {
+
+}
+
+.exerciseList {
+  padding: 10px 0;
+  font-size: 20px;
+}
+.exerciseList .exerciseItem {
+  border-top: 1px solid rgb(199, 199, 199);
+  padding: 10px 0;
+}
+label[for="exerciseSelect"] {
+  margin-bottom: 10px;
+}
+select[name="exerciseSelect"] {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.exerciseItemParams {
+
+}
+.exerciseItemParams .paramInput {
+  display: block;
+  padding: 5px 0;
+}
+.exerciseItemParams .paramInput input[type="text"] {
+  width: 50px;
+  font-size: 16px;
+}
+
+.deleteButton {
+  cursor: pointer;
+  color: rgb(160, 44, 44);
+}
+.deleteButton:hover {
+  color: rgb(109, 10, 10);
+}
+.addExerciseButton {
+  cursor: pointer;
+}
+.addWorkoutButton {
+  padding: 5px 15px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(75, 75, 75);
+  color: white;
 }
 </style>

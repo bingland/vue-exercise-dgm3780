@@ -1,6 +1,6 @@
 <template>
   <div class="WorkoutCard">
-    <p>{{workout.date}}</p>
+    <h1 class="workoutCardDate">{{formattedDate(workout.date)}}</h1>
     <div class="workoutInfo">
       <div class="workoutExercise" v-for="(exercise, index) in workout.exercises" :key="index">
         <div v-if="exercise.type === 'benchpress'" class="exercise benchpress">
@@ -26,6 +26,17 @@ export default {
     workout: Object
   },
   methods: {
+    formattedDate (d) {
+      let newDate = new Date(d + 'Z')
+      let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+      let month = months[newDate.getMonth()]
+      let date = newDate.getDate()
+      let year = newDate.getFullYear()
+      let time = `${month} ${date}, ${year}`
+      return time
+    }
+  },
+  computed: {
     
   }
 }
@@ -42,6 +53,10 @@ export default {
   background-color: rgb(241, 241, 241);
 }
 .workoutCardTitle {
+  font-size: 22px;
+  font-weight: bold;
+}
+.workoutCardDate {
   font-size: 22px;
   font-weight: bold;
 }

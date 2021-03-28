@@ -82,6 +82,12 @@ export default {
 </script>
 
 <style>
+input, select, option {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+html, body {
+  height: 100%;
+}
 .App {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -90,10 +96,13 @@ export default {
   display: grid;
   grid-template-columns: auto 350px;
   grid-gap: 10px;
+  height: 100%;
 }
 .workoutGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+
   grid-gap: 10px;
 }
 @media only screen and (max-width: 1200px) {
