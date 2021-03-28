@@ -55,7 +55,7 @@ export default {
   name: 'AddWorkoutArea',
   data() {
     return {
-      date: null,
+      date: this.currentDate(),
       exercises: [
         {
           type: 'benchpress',
@@ -83,6 +83,14 @@ export default {
     deleteWorkout (index) {
       console.log(index)
       this.exercises.splice(index, 1)
+    },
+    currentDate () {
+      let curDate = new Date()
+      let month = ("0" + (curDate.getMonth() + 1)).slice(-2)
+      let date = curDate.getDate()
+      let year = curDate.getFullYear()
+      let time = `${year}-${month}-${date}`
+      return time
     }
   },
   computed: {
@@ -110,14 +118,14 @@ export default {
         })
       }
     },
-    currentDate: function () {
+    currentDate2: function () {
       let curDate = new Date()
       console.log(curDate)
       let month = curDate.getMonth()
       console.log(month)
       let date = curDate.getDate()
       let year = curDate.getFullYear()
-      let time = `${year}-${month}-${date}`
+      let time = `${year}/${month}/${date}`
       return time
     }
   }
@@ -126,11 +134,11 @@ export default {
 
 <style scoped>
 .AddWorkoutArea {
-  border: 1px solid black;
+  border-left: 1px solid rgb(155, 155, 155);
   padding: 10px;
 }
 .AddWorkoutArea h1 {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: bold;
 }
 .AddWorkoutArea form {

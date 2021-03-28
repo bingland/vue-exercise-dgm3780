@@ -1,7 +1,7 @@
 <template>
   <div class="App">
     <div class="workoutGrid">
-      <workout-card v-for="(workout, index) in workouts" :key="index" :workout="workout" />
+      <workout-card v-for="(workout, index) in workouts" :key="index" :myIndex="index" :workout="workout" @delete:workout="deleteWorkout" />
     </div>
     <add-workout-area @add:workout="addWorkout" />
   </div>
@@ -74,8 +74,11 @@ export default {
   methods: {
     addWorkout (newWorkout) {
       console.log('Adding workout...')
-      console.log(newWorkout)
       this.workouts.push(newWorkout)
+    },
+    deleteWorkout (i) {
+      console.log('Deleting workout...')
+      this.workouts.splice(i, 1)
     }
   }
 }
@@ -95,15 +98,14 @@ html, body {
   color: #2c3e50;
   display: grid;
   grid-template-columns: auto 350px;
-  grid-gap: 10px;
   height: 100%;
 }
 .workoutGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 200px;
-
+  grid-auto-rows: 300px;
   grid-gap: 10px;
+  padding: 10px;
 }
 @media only screen and (max-width: 1200px) {
   .workoutGrid { grid-template-columns: repeat(2, 1fr); }

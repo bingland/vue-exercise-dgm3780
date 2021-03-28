@@ -15,6 +15,7 @@
           <p>Time: {{exercise.time}}</p>
         </div>
       </div>
+      <div class="deleteWorkoutCard" @click="$emit('delete:workout', myIndex)">Delete</div>
     </div>
   </div>
 </template>
@@ -23,11 +24,12 @@
 export default {
   name: 'WorkoutCard',
   props: {
-    workout: Object
+    workout: Object,
+    myIndex: Number
   },
   methods: {
     formattedDate (d) {
-      let newDate = new Date(d + 'Z')
+      let newDate = new Date(d.replace(/-/g, '/'))
       let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
       let month = months[newDate.getMonth()]
       let date = newDate.getDate()
@@ -44,13 +46,11 @@ export default {
 
 <style scoped>
 .WorkoutCard {
-  border: 1px solid black;
+  border: 1px solid rgb(156, 156, 156);
   border-radius: 7px;
-  padding: 5px;
-  cursor: pointer;
-}
-.WorkoutCard:hover {
-  background-color: rgb(241, 241, 241);
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: 4px 4px 6px 1px rgba(0, 0, 0, 0.082); 
 }
 .workoutCardTitle {
   font-size: 22px;
@@ -62,7 +62,7 @@ export default {
 }
 
 .workoutInfo {
-  
+  font-size: 20px;
 }
 .workoutExercise {
   
@@ -72,5 +72,10 @@ export default {
 }
 .exercise h1 {
   font-weight: bold;
+}
+.deleteWorkoutCard {
+  cursor: pointer;
+  color: rgb(160, 44, 44);
+  font-size: 16px;
 }
 </style>
